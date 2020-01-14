@@ -10,5 +10,18 @@
     "tslint.json": "*",
     "nx.json": "*"
   },
-  "projects": {}
+  "projects": {
+    "web-frantaapp-e2e": {
+      "tags": []
+    },
+    "web-frantaapp": {
+      "tags": []
+    },
+    "libs": {
+      "tags": []
+    },
+    "xplat": {
+      "tags": []
+    }
+  }
 }

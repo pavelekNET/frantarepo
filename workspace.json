@@ -1,8 +1,184 @@
 {
   "version": 1,
-  "projects": {},
+  "projects": {
+    "web-frantaapp": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/web-frantaapp",
+      "sourceRoot": "apps/web-frantaapp/src",
+      "prefix": "frantaworkspace",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/web-frantaapp",
+            "index": "apps/web-frantaapp/src/index.html",
+            "main": "apps/web-frantaapp/src/main.ts",
+            "polyfills": "apps/web-frantaapp/src/polyfills.ts",
+            "tsConfig": "apps/web-frantaapp/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "apps/web-frantaapp/src/favicon.ico",
+              "apps/web-frantaapp/src/assets"
+            ],
+            "styles": ["apps/web-frantaapp/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/web-frantaapp/src/environments/environment.ts",
+                  "with": "apps/web-frantaapp/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "web-frantaapp:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "web-frantaapp:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "web-frantaapp:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/web-frantaapp/tsconfig.app.json",
+              "apps/web-frantaapp/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/web-frantaapp/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/web-frantaapp/jest.config.js",
+            "tsConfig": "apps/web-frantaapp/tsconfig.spec.json",
+            "setupFile": "apps/web-frantaapp/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "web-frantaapp-e2e": {
+      "root": "apps/web-frantaapp-e2e",
+      "sourceRoot": "apps/web-frantaapp-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/web-frantaapp-e2e/cypress.json",
+            "tsConfig": "apps/web-frantaapp-e2e/tsconfig.e2e.json",
+            "devServerTarget": "web-frantaapp:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "web-frantaapp:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/web-frantaapp-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/web-frantaapp-e2e/**"]
+          }
+        }
+      }
+    },
+    "libs": {
+      "root": "libs",
+      "sourceRoot": "libs",
+      "projectType": "library",
+      "prefix": "franta",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "testing/test.libs.ts",
+            "tsConfig": "testing/tsconfig.libs.spec.json",
+            "karmaConfig": "testing/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "testing/tsconfig.libs.json",
+              "testing/tsconfig.libs.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "xplat": {
+      "root": "xplat",
+      "sourceRoot": "xplat",
+      "projectType": "library",
+      "prefix": "franta",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "testing/test.xplat.ts",
+            "tsConfig": "testing/tsconfig.xplat.spec.json",
+            "karmaConfig": "testing/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "testing/tsconfig.xplat.json",
+              "testing/tsconfig.xplat.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    }
+  },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
+    "defaultCollection": "@nstudio/xplat"
   },
   "schematics": {
     "@nrwl/workspace": {
@@ -47,6 +223,14 @@
       "application": {
         "linter": "eslint"
       }
+    },
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
     }
-  }
+  },
+  "defaultProject": "web-frantaapp"
 }

@@ -22,10 +22,28 @@
     "format:check": "nx format:check",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "clean": "npx rimraf hooks node_modules package-lock.json && npm i",
+    "start.web.frantaapp": "nx serve web-frantaapp"
   },
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "@angular/animations": "^8.2.0",
+    "@angular/common": "^8.2.0",
+    "@angular/compiler": "^8.2.0",
+    "@angular/core": "^8.2.0",
+    "@angular/forms": "^8.2.0",
+    "@angular/platform-browser": "^8.2.0",
+    "@angular/platform-browser-dynamic": "^8.2.0",
+    "@angular/router": "^8.2.0",
+    "core-js": "^2.5.4",
+    "rxjs": "~6.4.0",
+    "zone.js": "^0.9.1",
+    "@frantaworkspace/scss": "file:libs/scss",
+    "@ngx-translate/core": "~11.0.0",
+    "@ngx-translate/http-loader": "~4.0.0",
+    "reflect-metadata": "^0.1.12"
+  },
   "devDependencies": {
     "@nrwl/workspace": "8.11.0",
     "@types/node": "~8.9.4",
@@ -34,6 +52,28 @@
     "tslint": "~5.11.0",
     "eslint": "6.1.0",
     "typescript": "~3.5.3",
-    "prettier": "1.18.2"
+    "prettier": "1.18.2",
+    "@nstudio/angular": "8.1.1",
+    "@nstudio/web-angular": "8.1.1",
+    "@nstudio/web": "8.1.1",
+    "@nrwl/angular": "~8.8.0",
+    "@angular/compiler-cli": "^8.2.0",
+    "@angular/language-service": "^8.2.0",
+    "@angular-devkit/build-angular": "^0.803.14",
+    "codelyzer": "~5.0.1",
+    "jest-preset-angular": "7.0.0",
+    "@nrwl/jest": "8.8.3",
+    "jest": "24.1.0",
+    "@types/jest": "24.0.9",
+    "ts-jest": "24.0.0",
+    "cypress": "3.4.1",
+    "@nrwl/cypress": "8.8.3",
+    "@nstudio/electron-angular": "8.1.1",
+    "@nstudio/electron": "8.1.1",
+    "@nstudio/xplat": "8.1.1"
+  },
+  "xplat": {
+    "prefix": "franta",
+    "framework": "angular"
   }
 }

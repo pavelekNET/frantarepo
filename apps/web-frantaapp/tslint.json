@@ -1,0 +1,7 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "directive-selector": [true, "attribute", "frantaworkspace", "camelCase"],
+    "component-selector": [true, "element", "frantaworkspace", "kebab-case"]
+  }
+}
